@@ -1,0 +1,7 @@
+/*.o
+/obj/*.o
+/*.orig
+/*.rej
+/dmenu
+/stest
+

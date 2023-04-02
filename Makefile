@@ -4,9 +4,10 @@
 include config.mk
 
 SRC = drw.c dmenu.c stest.c util.c
-OBJ = $(SRC:.c=.o)
+OBJ=$(join $(addsuffix obj/, $(dir $(SRC))), $(notdir $(SRC:.c=.o)))
 
 all: options dmenu stest
+	rm -f ./config.h
 
 options:
 	@echo dmenu build options:
@@ -14,22 +15,20 @@ options:
 	@echo "LDFLAGS  = $(LDFLAGS)"
 	@echo "CC       = $(CC)"
 
-.c.o:
-	$(CC) -c $(CFLAGS) $<
+%.h:%.def.h
+	cp -r $< $@
 
-config.h:
-	cp config.def.h $@
+./obj/%.o:%.c
+	$(CC) $(CFLAGS) -c -o $@ $^
 
-$(OBJ): arg.h config.h config.mk drw.h
+dmenu: arg.h config.h config.mk drw.h $(OBJ)
+	$(CC) -o $@ ./obj/dmenu.o ./obj/drw.o ./obj/util.o $(LDFLAGS)
 
-dmenu: dmenu.o drw.o util.o
-	$(CC) -o $@ dmenu.o drw.o util.o $(LDFLAGS)
-
-stest: stest.o
-	$(CC) -o $@ stest.o $(LDFLAGS)
+stest: ./obj/stest.o
+	$(CC) -o $@ ./obj/stest.o $(LDFLAGS)
 
 clean:
-	rm -f dmenu stest $(OBJ) dmenu-$(VERSION).tar.gz
+	rm -f dmenu stest $(OBJ) dmenu-$(VERSION).tar.gz ./config.h
 
 dist: clean
 	mkdir -p dmenu-$(VERSION)
