@@ -1,7 +1,7 @@
-/*.o
-/obj/*.o
-/*.orig
-/*.rej
-/dmenu
-/stest
+obj/
+./*.orig
+./*.rej
+./dmenu
+./stest
+.cache
 
