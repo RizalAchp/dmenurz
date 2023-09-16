@@ -5,3 +5,5 @@ obj/
 ./stest
 .cache
 
+dmenu
+stest

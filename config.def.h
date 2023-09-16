@@ -32,7 +32,7 @@ static char* prompt = NULL;
 // 8 => tomorrow-night
 // 9 => solarized-light
 #define COLOR_IMPL
-#define THEME THEME_GRUVBOX_DARK
+#define THEME THEME_MONOKAI_PRO
 #include "colors/include.h"
 
 /* -l and -g options; controls number of lines and columns in grid if > 0 */
