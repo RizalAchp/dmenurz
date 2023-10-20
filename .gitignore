@@ -1,9 +1,10 @@
 obj/
-./*.orig
-./*.rej
-./dmenu
-./stest
-.cache
-
+build/
+*.orig
+*.rej
 dmenu
 stest
+.cache
+cb
+*.old
+compile_commands.json
